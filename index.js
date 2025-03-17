@@ -14,8 +14,11 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log("MongoDB connecté"))
-  .catch((err) => console.log(err));
+  .catch((err) => console.error("Error connecting to MongoDB:", err));
 // Routes
 app.use('/articles', require('./routes/articleRoutes'));
+app.get("/", (req, res) => {
+  res.send("Bienvenue sur le backend Node.js !");
+});
 app.listen(PORT, () => console.log(`Serveur démarré sur le port
 ${PORT}`));
