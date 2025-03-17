@@ -18,6 +18,9 @@ mongoose
   .catch((err) => console.error("Error connecting to MongoDB:", err));
 // Routes
 app.use("/articles", require("./routes/articleRoutes"));
+app.use("/offres", require("./routes/offreRoutes"));
+app.use("/produits", require("./routes/produitRoutes"));
+
 app.get("/", (req, res) => {
   res.send("Bienvenue sur le backend Node.js! 🚀");
 });
