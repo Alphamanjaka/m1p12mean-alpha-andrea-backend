@@ -9,6 +9,12 @@ const getAllPieces = async () => {
   return await Piece.find();
 };
 
+const search = async (pieceName) => {
+  let allPiece = await Piece.find();
+  pieceFond = allPiece.filter(piece => piece.name.toLowerCase().includes(pieceName.toLowerCase()));
+  return pieceFond;
+};
+
 const updatePiece = async (id, data) => {
   return await Piece.findByIdAndUpdate(id, data, { new: true });
 };
@@ -22,4 +28,5 @@ module.exports = {
   getAllPieces,
   updatePiece,
   deletePiece,
+  search
 };

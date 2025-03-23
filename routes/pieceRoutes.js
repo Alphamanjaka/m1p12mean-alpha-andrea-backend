@@ -23,6 +23,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+// rechercher une piece
+router.get("/search", async (req, res) => {
+  try {
+    const query = req.query.name;
+    const pieces = await pieceService.search(query);
+    res.json(pieces);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // Mettre à jour un piece
 router.put("/:id", async (req, res) => {
   try {
