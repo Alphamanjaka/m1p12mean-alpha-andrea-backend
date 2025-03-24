@@ -1,0 +1,37 @@
+{
+  "name": "garage-management-backend",
+  "version": "1.0.0",
+  "description": "ato izany no anaova-tsika ireo back-end rehetra",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "prod": "cross-env NODE_ENV=production nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alphamanjaka/garage-management-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alphamanjaka/garage-management-backend/issues"
+  },
+  "homepage": "https://github.com/Alphamanjaka/garage-management-backend#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "garage-management-backend": "file:",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.12.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.1.9"
+  }
+}
