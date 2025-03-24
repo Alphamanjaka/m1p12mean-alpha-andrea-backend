@@ -1,9 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config();
+const dotenv = require('dotenv');
+
+const envFile = `.env.${process.env.NODE_ENV || "development"}`;
+dotenv.config({ path: envFile });
+
 const app = express();
 const PORT = process.env.PORT || 5000;
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -20,7 +25,10 @@ mongoose
 app.use("/articles", require("./routes/articleRoutes"));
 app.use("/offres", require("./routes/offreRoutes"));
 app.use("/produits", require("./routes/produitRoutes"));
-
+app.use('/services', require('./routes/serviceRoutes'));
+app.use('/login', require('./routes/authRoutes'));
+app.use('/user', require('./routes/userRoutes'));
+app.use('/stock/pieces', require('./routes/pieceRoutes'));
 app.get("/", (req, res) => {
   res.send("Bienvenue sur le backend Node.js! 🚀");
 });
