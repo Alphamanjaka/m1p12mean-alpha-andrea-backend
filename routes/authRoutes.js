@@ -14,11 +14,19 @@ router.post('/', async (req, res) => {
             // console.log("user not fond");
             res.status(400).json({ message: "Utilisateur introuvable" });
         } else if (userFound){
-            // console.log("find user ");
-
-            // Génération du token
-            const token = jwt.sign({ id: userFound._id, role: userFound.role }, "SECRET_KEY", { expiresIn: "1h" });
-            res.json({ token });
+            const payload = {
+                nom: userFound.nom, 
+                prenom: userFound.prenom, 
+                email: userFound.email,
+                role: userFound.role,
+            };
+            
+            const token = jwt.sign(payload, "SECRET_KEY", { expiresIn: '1h' });
+            res.status(201).json({ 
+                token: token,
+                role: userFound.role,
+                identifiant: userFound._id
+            });
         }
     } catch (error) {
         res.status(400).json({ message: error.message });
