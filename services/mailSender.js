@@ -1,22 +1,26 @@
+require('dotenv').config();
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.office365.com",
+    service: "gmail",
+    host: process.env.GMAIL_HOST,
     secure: false,
     port: 587,
     auth: {
-        user: "prescripteur_01@outlook.com",
-        pass: "ngjhemkpvqnhhafe"
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS
     },
     tls: {
-        rejectUnauthorized: false // Désactive la vérification du certificat
-    }
+        rejectUnauthorized: false,
+    },
+    connectionTimeout: 10000, // 10 secondes
+    socketTimeout: 10000 // 10 secondes
 })
 
 const mailOptions = {
-    from : "prescripteur_01@outlook.com",
-    to : ["charle_andre_as@outlook.com"],
-    subject: "Emai test",
+    from : process.env.GMAIL_USER,
+    to : "charle.andre.as@gmail.com",
+    subject: "EmaiL test",
     text: " zany ny test ana mail e"
 }
 
@@ -27,12 +31,3 @@ transporter.sendMail(mailOptions,(error,info)=>{
         console.log("email envoyé", info.response)
     }
 })
-
-// const sendMail = async(transporter,mailOptions) =>{ 
-//     try{
-//         await transporter.sendMail(mailOptions);
-//         console.log("mail sent ");
-//     } catch( error){console.error(error)}
-// }
-
-// sendMail(transporter,mailOptions);
