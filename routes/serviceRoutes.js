@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Service = require('../models/Service');
+const serviceService = require("../services/serviceService");
 
 // Créer un service
 router.post('/', async (req, res) => {
@@ -39,6 +40,17 @@ router.delete('/:id', async (req, res) => {
     try {
         await Service.findByIdAndDelete(req.params.id);
         res.json({ message: "Service supprimé" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+//
+router.get("/search", async (req, res) => {
+    try {
+        const query = req.query.name;
+        const service = await serviceService.search(query);
+        res.json(service);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

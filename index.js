@@ -29,6 +29,7 @@ app.use('/services', require('./routes/serviceRoutes'));
 app.use('/login', require('./routes/authRoutes'));
 app.use('/user', require('./routes/userRoutes'));
 app.use('/stock/pieces', require('./routes/pieceRoutes'));
+app.use('/appointment', require('./routes/appointmentRoutes'));
 app.get("/", (req, res) => {
   res.send("Bienvenue sur le backend Node.js! 🚀");
 });
