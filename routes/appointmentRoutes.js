@@ -45,4 +45,44 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+router.get("/unassigned", async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    const startIndex = (page - 1) * limit;
+
+    const total = await Appointment.countDocuments();
+    const items = await Appointment.find({
+      $or: [
+        { employeeId: null },
+        { employeeId: { $exists: false } }
+      ]
+    })
+      .sort({ expectedDate: +1 })
+      .skip(startIndex)
+      .limit(limit);
+    
+    const results = {
+      totalItems: total,
+      totalPages: Math.ceil(total / limit),
+      currentPage: page,
+      items: items
+    };
+    
+    if (startIndex + limit < total) {
+      results.nextPage = page + 1;
+    }
+    
+    if (startIndex > 0) {
+      results.previousPage = page - 1;
+    }
+    
+    res.json(results);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 module.exports = router;

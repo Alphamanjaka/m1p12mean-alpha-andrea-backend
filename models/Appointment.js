@@ -6,6 +6,9 @@ const AppointmentSchema = new mongoose.Schema(
     clientID: { type: String, required: true },
     carInfo: { type: {}, required: true },
     serviceList: { type: [], required: true },
+    serviceStartedAt: {type : Date},
+    serviceExpectedEndAt: {type : Date},
+    employeeId: {type: String, require: false}
   },
   { timestamps: true }
 );
