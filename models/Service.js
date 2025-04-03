@@ -7,7 +7,7 @@ const ServiceSchema = new mongoose.Schema({
     short_description: { type: String, required: true, default: 'description courte par défaut' },
     description: { type: String, required: true, default: 'description par défaut' },
     price: { type: Number, required: true, default: 500 },
-    status: {type:String},
+    status: {type:String, default: 'En attente'},
 
 }, { timestamps: true });
 
