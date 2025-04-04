@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Piece = require('./Piece');
 
 const ServiceSchema = new mongoose.Schema({
     id: {type: String},
@@ -8,6 +9,7 @@ const ServiceSchema = new mongoose.Schema({
     description: { type: String, required: true, default: 'description par défaut' },
     price: { type: Number, required: true, default: 500 },
     status: {type:String, default: 'En attente'},
+    pieceList: {type: []}
 
 }, { timestamps: true });
 
